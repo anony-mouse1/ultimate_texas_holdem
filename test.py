@@ -1,3 +1,5 @@
+# purely made to test out LEGB rule in python
+
 def sum_numbers(a, b):
     return a + b
 
