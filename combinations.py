@@ -1,5 +1,6 @@
 from itertools import combinations
 
+#card branch
 cardfaces = []
 suits = ['H', 'S', 'C', 'D']
 royals = ['J', 'Q', 'K', 'A']
@@ -63,11 +64,6 @@ def start():
         except:
             print("Not a valid input")
             continue
-    print(type(ante))
-    print(type(blinds))
-    print(type(trips))
-    #confirm if they are all int...and they are :-)
-#still have to add "play" and "pot" and make sure that they are betting more than 0...
 
 
 ##deal cards
@@ -76,7 +72,7 @@ def start():
 start()
 
 '''
-def check_hand():
+def check_ hand():
     ##card types
 
 
