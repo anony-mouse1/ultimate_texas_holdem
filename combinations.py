@@ -15,7 +15,6 @@ for k in range(4):
         card = f"{cardfaces[l]}{suits[k]}"
         deck.append(card)
 # shuffle(deck)
-# print(deck)
 # f string works with different data types (i.e. str & int)
 
 table = ['3S', '2C', '10D', '6S', '9D']
