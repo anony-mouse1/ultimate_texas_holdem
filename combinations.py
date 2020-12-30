@@ -1,5 +1,5 @@
 from itertools import combinations
-
+from random import shuffle
 #card branch
 cardfaces = []
 suits = ['H', 'S', 'C', 'D']
@@ -15,12 +15,22 @@ for k in range(4):
     for l in range(13):
         card = f"{cardfaces[l]}{suits[k]}"
         deck.append(card)
-# shuffle(deck)
+#shuffle(deck)
+dealer_cards = []
+player_cards = []
+table = []
+for i in range(2):
+    dealer_cards.append(deck[i])
+    deck.pop(i)
+    player_cards.append(deck[i])
+    deck.pop(i)
+
+for i in range(5):
+    table.append(deck[i])
+    deck.pop(i)
+
 # f string works with different data types (i.e. str & int)
 
-table = ['3S', '2C', '10D', '6S', '9D']
-player_cards = ['5C', '5D']
-dealer_cards = ['3C', '4S']
 player_hands = [*player_cards, *table]
 # or you can do player_cards + table
 # this still returns a list
@@ -51,25 +61,33 @@ def start():
 # if not, send msg saying u don't have enough chips. restart game to play again.
     while trips not in ['y', 'n', 'Y', 'N']:
         trips = ''
-        trips = (input("Optional. Trips?. Type y or n: "))
+        trips = (input("Optional. Trips?. (y/n): "))
 
-    while True:
-        try:
-            if trips in ['y', 'Y']:
-                trips = int(input("Trips value: "))
-                if int(ante) <= player_chips and int(trips) % 5 == 0:
-                    break
-            else:
-                break
-        except:
-            print("Not a valid input")
-            continue
+    while trips in ['y', 'Y']:
+        while True:
+            try:
+                    trips = int(input("Trips value: "))
+                    if int(trips) <= player_chips and int(trips) % 5 == 0:
+                        break
+                    else:
+                        continue
+
+                #this is for "no"
+            except:
+                print("Not a valid input")
+                print(trips)
+                continue
+
+    print(player_cards)
 
 
 ##deal cards
 
 
 start()
+
+print(ante)
+#prints 10
 
 '''
 def check_ hand():
