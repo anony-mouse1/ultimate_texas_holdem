@@ -50,16 +50,25 @@ def start():
 #check that user has at least 1x of their bet before running the game
 # if not, send msg saying u don't have enough chips. restart game to play again.
     while trips not in ['y', 'n', 'Y', 'N']:
+        trips = ''
         trips = (input("Optional. Trips?. Type y or n: "))
-    while trips in ['y', 'Y']:
-        trips = (input("Trips value: "))
 
-        while not int(trips) % 5 == 0:
-            trips = input('Trips value: ')
-
-    ante = int(ante)
-    blinds = int(blinds)
-    trips = int(trips)
+    while True:
+        try:
+            if trips in ['y', 'Y']:
+                trips = int(input("Trips value: "))
+                if int(ante) <= player_chips and int(trips) % 5 == 0:
+                    break
+            else:
+                break
+        except:
+            print("Not a valid input")
+            continue
+    print(type(ante))
+    print(type(blinds))
+    print(type(trips))
+    #confirm if they are all int...and they are :-)
+#still have to add "play" and "pot" and make sure that they are betting more than 0...
 
 
 ##deal cards
