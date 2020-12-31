@@ -34,7 +34,6 @@ player_hands = [*player_cards, *table]
 dealer_hands = [*dealer_cards, *table]
 
 ante = 0
-# blinds = 0
 trips = 0
 player_chips = 500
 dealer_chips = float('inf')
@@ -45,6 +44,8 @@ dealer_chips = float('inf')
 
 def pre():
     global player_chips, ante, trips
+    print("Ultimate Texas Holdem")
+    print("Your chips:", player_chips)
     while True:
         try:
             ante = int(input("Ante value: "))
@@ -59,8 +60,8 @@ def pre():
     player_chips -= ante * 2
     print("Your chips:", player_chips)
 
-    while trips not in ['y', 'n', 'Y', 'N']:
-        trips = ''
+    trips = ''
+    while trips.lower() not in ['y', 'n']:
         trips = (input("Optional. Trips?. (y/n): "))
 
     while trips in ['y', 'Y']:
@@ -97,8 +98,8 @@ def start():
 
 start()
 print("Your cards are:", player_cards[0], 'and', player_cards[1])
-player_decision = ''
 
+player_decision = ''
 while player_decision.lower() not in ['check', '4x', '3x']:
     player_decision = (input("Check or 4x or 3x?: "))
 Complete= True
