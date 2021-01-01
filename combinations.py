@@ -1,7 +1,7 @@
 from itertools import combinations
 from random import shuffle
 
-# card branch
+# branch card
 cardfaces = []
 suits = ['H', 'S', 'C', 'D']
 royals = ['J', 'Q', 'K', 'A']
