@@ -33,6 +33,8 @@ for i in range(5):
 player_hands = [*player_cards, *table]
 dealer_hands = [*dealer_cards, *table]
 
+trips = 0
+player_chips = 50
 ante = 0
 trips = 0
 player_chips = 500
@@ -51,28 +53,30 @@ def pre():
             ante = int(input("Ante value: "))
             if int(ante) <= player_chips and int(ante) % 5 == 0 and int(ante) * 3 <= player_chips and int(ante) != 0:
                 print("Blind value:", ante)
-                break
+                return ante
+                #break
         except:
             print("Not a valid input")
             continue
 
-    #chips
+    # chips
     player_chips -= ante * 2
     print("Your chips:", player_chips)
-
     trips = ''
     while trips.lower() not in ['y', 'n']:
         trips = (input("Optional. Trips?. (y/n): "))
 
-#before betting trips, make sure that they have at least 1x of their ante left in player_chips
+    # before betting trips, make sure that they have at least 1x of their ante left in player_chips
     while trips in ['y', 'Y']:
         while True:
             try:
                 trips = int(input("Trips value: "))
-                if int(trips) <= player_chips and int(trips) % 5 == 0 and int(trips) != 0 and (player_chips-trips >= ante):
+                if int(trips) <= player_chips and int(trips) % 5 == 0 and int(trips) != 0 and (
+                        player_chips - trips >= ante):
                     player_chips -= trips
-                    break
-                    #or i could use return...nah
+                    return trips, player_chips
+                    # break
+                    # or i could use return...nah
                 else:
                     continue
 
@@ -81,7 +85,6 @@ def pre():
                 print("Not a valid input")
                 continue
     print("Your chips:", player_chips)
-
 
 
 # print(player_chips)
@@ -103,26 +106,48 @@ print("Your cards are:", player_cards[0], 'and', player_cards[1])
 player_decision = ''
 while player_decision.lower() not in ['check', '4x', '3x']:
     player_decision = (input("Check or 4x or 3x?: "))
-Complete= False
-while True:
+
+while player_chips >= 3 * ante:
     try:
-        player_decision = player_decision.lower()
-        if player_decision == 'check':
-            break
-        elif player_decision == '4x':
-            if player_chips >= ante * 4:
-                pass
-            else:
-                print("Insufficient chips")
-                break
-        elif player_decision == '3x':
-            if player_chips >= ante * 3:
-                pass
-            else:
-                print("")
+        if player_decision == '3x':
+            print("Player bet 3x")
+
+        # if player_chips >= ante * 3:
+        # elif player_decision == '4x':
+        else:
+            #this else would be for 4x
+            # if player_chips >= ante * 4:
+            for i in range(5):
+                table.append(deck[i])
+                deck.pop(i)
     except:
         continue
+else:
+    player_decision= player_decision.lower()
+    if player_decision=='check':
+        print("Player checked")
+    else:
+        print("Insufficient chips")
+
+
 # print(player_chips)
+
+def single_round(argument, n):
+    if player_chips >= ante * argument:
+        for c in range(n):
+            table.append(deck[i])
+            deck.pop(i)
+    else:
+        print("Insufficient chips")
+
+
+def after_bet(argument):
+    global table, deck
+    table.append(deck[i])
+
+print(ante)
+print(trips)
+
 '''
 def check_ hand():
     ##card types
