@@ -64,11 +64,12 @@ def pre():
     while trips.lower() not in ['y', 'n']:
         trips = (input("Optional. Trips?. (y/n): "))
 
+#before betting trips, make sure that they have at least 1x of their ante left in player_chips
     while trips in ['y', 'Y']:
         while True:
             try:
                 trips = int(input("Trips value: "))
-                if int(trips) <= player_chips and int(trips) % 5 == 0 and int(trips) != 0:
+                if int(trips) <= player_chips and int(trips) % 5 == 0 and int(trips) != 0 and (player_chips-trips >= ante):
                     player_chips -= trips
                     break
                     #or i could use return...nah
@@ -102,8 +103,8 @@ print("Your cards are:", player_cards[0], 'and', player_cards[1])
 player_decision = ''
 while player_decision.lower() not in ['check', '4x', '3x']:
     player_decision = (input("Check or 4x or 3x?: "))
-Complete= True
-while Complete:
+Complete= False
+while True:
     try:
         player_decision = player_decision.lower()
         if player_decision == 'check':
@@ -113,7 +114,7 @@ while Complete:
                 pass
             else:
                 print("Insufficient chips")
-                Complete = False
+                break
         elif player_decision == '3x':
             if player_chips >= ante * 3:
                 pass
