@@ -34,10 +34,8 @@ player_hands = [*player_cards, *table]
 dealer_hands = [*dealer_cards, *table]
 
 trips = 0
-player_chips = 50
-ante = 0
-trips = 0
 player_chips = 500
+ante = 0
 dealer_chips = float('inf')
 
 
@@ -54,7 +52,7 @@ def pre():
             if int(ante) <= player_chips and int(ante) % 5 == 0 and int(ante) * 3 <= player_chips and int(ante) != 0:
                 print("Blind value:", ante)
                 return ante
-                #break
+                # break
         except:
             print("Not a valid input")
             continue
@@ -101,53 +99,53 @@ def start():
 
 
 start()
-print("Your cards are:", player_cards[0], 'and', player_cards[1])
 
-player_decision = ''
-while player_decision.lower() not in ['check', '4x', '3x']:
-    player_decision = (input("Check or 4x or 3x?: "))
 
-while player_chips >= 3 * ante:
-    try:
-        if player_decision == '3x':
-            print("Player bet 3x")
+def first_round():
+    global player_chips, ante
+    print("Your cards are:", player_cards[0], 'and', player_cards[1])
 
-        # if player_chips >= ante * 3:
-        # elif player_decision == '4x':
-        else:
-            #this else would be for 4x
-            # if player_chips >= ante * 4:
-            for i in range(5):
+    play = ''
+    while play.lower() not in ['check', '4x', '3x']:
+        play = (input("Check or 4x or 3x?: "))
+
+    while player_chips >= 3 * ante:
+        try:
+            if play == '3x':
+                print("Player bet 3x")
+                play = 3 * ante
+                player_chips -= play
+            else:
+                play = 4 * ante
+                player_chips-=play
+            for c in range(5):
                 table.append(deck[i])
                 deck.pop(i)
-    except:
-        continue
-else:
-    player_decision= player_decision.lower()
-    if player_decision=='check':
-        print("Player checked")
+                # this else would be for 4x
+        except:
+            continue
     else:
-        print("Insufficient chips")
-
-
-# print(player_chips)
+        play = play.lower()
+        if play == 'check':
+            print("Player checked")
+        else:
+            print("Insufficient chips")
 
 def single_round(argument, n):
-    if player_chips >= ante * argument:
-        for c in range(n):
-            table.append(deck[i])
-            deck.pop(i)
-    else:
-        print("Insufficient chips")
+    global player_chips, ante
+    print(ante)
+     if player_chips >= ante * argument:
+     for c in range(n):
+         table.append(deck[i])
+         deck.pop(i)
 
 
 def after_bet(argument):
     global table, deck
     table.append(deck[i])
 
-print(ante)
-print(trips)
 
+single_round(player_chips, ante)
 '''
 def check_ hand():
     ##card types
