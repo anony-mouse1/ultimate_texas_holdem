@@ -2,6 +2,15 @@ from itertools import combinations
 from random import shuffle
 
 # branch card
+
+
+trips = 0
+player_chips = 200
+ante = 50
+play = 0
+dealer_chips = float('inf')
+
+
 cardfaces = []
 suits = ['H', 'S', 'C', 'D']
 royals = ['J', 'Q', 'K', 'A']
@@ -33,10 +42,6 @@ for i in range(5):
 player_hands = [*player_cards, *table]
 dealer_hands = [*dealer_cards, *table]
 
-trips = 0
-player_chips = 500
-ante = 0
-dealer_chips = float('inf')
 
 
 # technically speaking, there is no real 'dealer chips'... it will always be technically..infinity
@@ -84,123 +89,62 @@ def pre():
                 continue
     print("Your chips:", player_chips)
 
+    round()
+    #single_round(['check', '3x', '4x'])
+
 
 # print(player_chips)
-# prints same both times (reference line 83)
-
 
 # global ante still works
 
-def start():
-    if player_chips >= 15:
+
+
+def round():
+    global player_chips, ante
+    print("Your cards are:", player_cards[0], 'and', player_cards[1])
+
+
+
+def single_round(argument):
+    global player_chips, play
+    play_wo_check = argument
+    argument = ''
+    while argument not in play_wo_check:
+        argument = input(" or ".join(play_wo_check) + '?')
+    play_wo_check.pop(0)
+    while argument in play_wo_check:
+        if player_chips >= int(play_wo_check[0][0]) * ante:
+            for i in play_wo_check:
+                if argument == i:
+                    print("Play bet:", i)
+                    argument = int(i[0]) * ante
+                    player_chips -= argument
+            break
+        else:
+            print("Insufficient chips")
+            break
+    else:
+        print("Player Checked")
+    play = argument
+    for c in range(5 - len(table)):
+        table.append(deck[c])
+        deck.pop(c)
+        print("Table: ", table)
+
+single_round(['check', '3x', '4x'])
+#just to see if it works
+# check, lowest to highest
+
+
+# start()
+
+
+
+def srt():
+    if player_chips > 15:
         pre()
     else:
         print("You don't have sufficient chips to play. Please refresh the game to earn your chips.")
 
 
-start()
-
-
-def first_round():
-    global player_chips, ante
-    print("Your cards are:", player_cards[0], 'and', player_cards[1])
-
-    play = ''
-    while play.lower() not in ['check', '4x', '3x']:
-        play = (input("Check or 4x or 3x?: "))
-
-    while player_chips >= 3 * ante:
-        try:
-            if play == '3x':
-                print("Player bet 3x")
-                play = 3 * ante
-                player_chips -= play
-            else:
-                play = 4 * ante
-                player_chips-=play
-            for c in range(5):
-                table.append(deck[i])
-                deck.pop(i)
-                # this else would be for 4x
-        except:
-            continue
-    else:
-        play = play.lower()
-        if play == 'check':
-            print("Player checked")
-        else:
-            print("Insufficient chips")
-
-def single_round(argument, n):
-    global player_chips, ante
-    print(ante)
-     if player_chips >= ante * argument:
-     for c in range(n):
-         table.append(deck[i])
-         deck.pop(i)
-
-
-def after_bet(argument):
-    global table, deck
-    table.append(deck[i])
-
-
-single_round(player_chips, ante)
-'''
-def check_ hand():
-    ##card types
-
-
-def royal_flush(hand):
-    pass
-
-
-def straight_flush(hand):
-    if flush(hand) and straight(hand):
-        return True
-
-
-def four_of_a_kind(hand):
-    pass
-
-
-def full_house(hand):
-    pass
-
-
-def flush(hand):
-    pass
-
-
-def straight(hand):
-    pass
-
-
-def three_of_a_kind(hand):
-    pass
-
-
-def two_pair(hand):
-    pass
-
-
-def pair(hand):
-    pass
-
-
-def high_card(hand):
-    pass
-
-
-best_hand = 0
-
-
-def dealer():
-    for hand in list(map(list, combinations(dealer_hands, 5))):
-        pass
-
-
-def player():
-    for hand in list(map(list, combinations(player_hands, 5))):
-        pass
-'''
+srt()
