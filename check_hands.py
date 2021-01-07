@@ -31,6 +31,7 @@ def flush():
     return len(set(hand_suits)) == 1
 
 
+
 def straight():
     return len(set(hand_values)) == 5 and (hand_values[-1] - hand_values[0] == 4)
 
