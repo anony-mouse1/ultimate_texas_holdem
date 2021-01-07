@@ -37,14 +37,9 @@ for i in range(2):
     player_cards.append(deck[i])
     deck.pop(i)
 
-for i in range(5):
-    table.append(deck[i])
-    deck.pop(i)
-
-player_hands = [*player_cards, *table]
-dealer_hands = [*dealer_cards, *table]
-
-
+#for i in range(5):
+ #   table.append(deck[i])
+  #  deck.pop(i)
 
 # technically speaking, there is no real 'dealer chips'... it will always be technically..infinity
 
@@ -150,3 +145,8 @@ def srt():
 
 
 srt()
+
+player_hands = [*player_cards, *table]
+dealer_hands = [*dealer_cards, *table]
+
+#then you do the combinations thing

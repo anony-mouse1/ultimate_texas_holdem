@@ -1,4 +1,5 @@
-hand = ['AC', 'KC', 'QC', 'JC', '10C']
+from itertools import combinations
+hand = ['2H', '7S', '10S', 'JD', '2C']
 hand_values = [h[:-1] for h in hand]
 hand_suits = [h[-1] for h in hand]
 
@@ -6,7 +7,7 @@ dic = {'J':11, 'Q':12, 'K':13, 'A': 14}
 hand_values = [dic.get(n, n) for n in hand_values]
 hand_values = [int(i) for i in hand_values]
 hand_values.sort()
-print(hand_values)
+print("Sorted hand:", hand_values)
 
 
 def royal_flush():
@@ -31,7 +32,6 @@ def flush():
     return len(set(hand_suits)) == 1
 
 
-
 def straight():
     return len(set(hand_values)) == 5 and (hand_values[-1] - hand_values[0] == 4)
 
@@ -46,6 +46,10 @@ def two_pair():
 
 def one_pair():
     return any(hand_values.count(item) == 2 for item in hand_values)
+
+
+check_hand_dict = {10: 'royal-flush', 9: 'straight-flush', 8: 'four-of-a-kind', 7: 'full-house', 6: 'flush',
+                  5: 'straight', 4: 'three-of-a-kind', 3: 'two-pair', 2: 'one-pair', 1:'high card'}
 
 
 def check_hand():
@@ -70,6 +74,5 @@ def check_hand():
     return 1
 
 
-print(check_hand())
 
 
