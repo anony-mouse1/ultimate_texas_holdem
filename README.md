@@ -21,3 +21,5 @@ Winner of same type of card: for instance, if the dealer and player both have a 
 In this version, payouts ARE given. Refer to official UTH documentation for exact payouts and rules. Working on modifying the code to make it less lengthy and re-use functions efficiently. 
 In this version, the type of card is solely based on the rank of card. In other words, if both player and dealer have a flush, it will automatically be a tie, regardless if the player (for instance) has a higher rank of flush. ONLY rank of card is taken into account when comparing the dealer's and player's hand. 
 
+Future Updates:
+convert into classes to avoid using globals
