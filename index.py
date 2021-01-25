@@ -276,3 +276,4 @@ while player_chips >= 15:
 else:
     print("You don't have sufficient chips to play. Please refresh the game to earn your chips.")
 
+#index.py
