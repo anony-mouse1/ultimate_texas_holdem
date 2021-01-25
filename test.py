@@ -1,3 +1,5 @@
+#JUST testing payouts.py to see if it works by bulk testing ranks of hands 
+
 from itertools import combinations
 
 
